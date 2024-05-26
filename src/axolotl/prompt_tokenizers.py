@@ -74,6 +74,10 @@ class PromptTokenizingStrategy(abc.ABC):
             return_tensors=None,
             return_token_type_ids=False,
         )
+
+        if "token_type_ids" in result:
+            del result["token_type_ids"]
+
         if len(result["input_ids"]) == 0:
             LOG.warning("Tokenizer result is empty. You may want to audit your dataset")
             return empty
